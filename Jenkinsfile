@@ -19,7 +19,7 @@ pipeline {
         script {
           sh '''#!/bin/bash
           # Run Eslint
-          npm run lint
+          yarn run lint
           '''
         }
       }
