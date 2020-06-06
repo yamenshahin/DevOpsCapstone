@@ -14,12 +14,22 @@ pipeline {
         }
       }
     }
+    stage('Build') {
+       steps {
+         sh 'npm install'
+       }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm test'
+      }
+    }
     stage('Linting React app') {
       steps {
         script {
           sh '''#!/bin/bash
           # Run Eslint
-          yarn run lint
+          npm run lint
           '''
         }
       }
