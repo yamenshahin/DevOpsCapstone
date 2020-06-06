@@ -16,13 +16,8 @@ pipeline {
     }
     stage('Build') {
        steps {
-         sh 'npm install'
+         sh 'yarn install'
        }
-    }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
     }
     stage('Linting React app') {
       steps {
