@@ -7,6 +7,13 @@ pipeline {
     dockerImage = ''
   }
   stages {
+    stage('Linting Docker') {
+      steps {
+        script {
+          '/home/ubuntu/.local/bin/hadolint Dockerfile'
+        }
+      }
+    }
     stage('Building image') {
       steps {
         script {
