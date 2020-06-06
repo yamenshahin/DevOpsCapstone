@@ -10,7 +10,7 @@ pipeline {
     stage('Linting Docker') {
       steps {
         script {
-          '/home/ubuntu/.local/bin/hadolint Dockerfile'
+          sh '/home/ubuntu/.local/bin/hadolint Dockerfile'
         }
       }
     }
