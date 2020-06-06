@@ -14,6 +14,16 @@ pipeline {
         }
       }
     }
+    stage('Linting React app') {
+      steps {
+        script {
+          sh '''#!/bin/bash
+          # Run Eslint
+          npm run lint
+          '''
+        }
+      }
+    }
     stage('Building image') {
       steps {
         script {
