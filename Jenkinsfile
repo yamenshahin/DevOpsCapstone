@@ -7,6 +7,13 @@ pipeline {
     dockerImage = ''
   }
   stages {
+    stage('Linting Index/HTML') {
+      steps {
+        script {
+          sh 'tidy -q -e *.html'
+        }
+      }
+    }
     stage('Linting Docker') {
       steps {
         script {
