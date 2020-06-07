@@ -1,36 +1,32 @@
 {
-   "kind":"ReplicationController",
-   "apiVersion":"v1",
-   "metadata":{
-      "name":"green",
-      "labels":{
-         "app":"green"
+   "kind": "ReplicationController",
+   "apiVersion": "v1",
+   "metadata": {
+      "name": "green",
+      "labels": {
+         "app": "green"
       }
    },
-   "spec":{
-      "replicas":1,
-      "selector":{
-         "app":"green"
+   "spec": {
+      "replicas": 1,
+      "selector": {
+         "app": "green"
       },
-      "template":{
-         "metadata":{
-            "labels":{
-               "app":"green"
+      "template": {
+         "metadata": {
+            "labels": {
+               "app": "green"
             }
          },
-         "spec":{
-            "containers":[
-               {
-                  "name":"green",
-                  "image":"yamenshahin/devopscapstone",
-                  "ports":[
-                     {
-                        "name":"http-server",
-                        "containerPort":80
-                     }
-                  ]
-               }
-            ]
+         "spec": {
+            "containers": [{
+               "name": "green",
+               "image": "yamenshahin/devopscapstone",
+               "ports": [{
+                  "name": "http-server",
+                  "containerPort": 80
+               }]
+            }]
          }
       }
    }
