@@ -21,7 +21,7 @@ pipeline {
         }
       }
     }
-    stage('Building image') {
+    stage('Building Image') {
       steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -37,10 +37,60 @@ pipeline {
         }
       }
     }
-    stage('Remove Unused docker image') {
+    stage('Remove Unused Docker Image') {
       steps {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
+    }
+    stage('Set Current kubectl Context to The Cluster') {
+      steps {
+				withAWS(region:'us-east-1', credentials:'aws_credentials') {
+					sh '''
+						kubectl config use-context arn:aws:eks:us-east-1:655649737419:cluster/projectCapstone
+					'''
+				}
+			}
+    }
+    stage('Create Blue Controller') {
+      steps {
+				withAWS(region:'us-east-1', credentials:'aws_credentials') {
+					sh '''
+						kubectl apply -f ./blue-controller.json
+					'''
+				}
+			}
+    }
+    stage('Create Grean Controller') {
+      steps {
+				withAWS(region:'us-east-1', credentials:'aws_credentials') {
+					sh '''
+						kubectl apply -f ./green-controller.json
+					'''
+				}
+			}
+    }
+    stage('Create Service To Redirect to Blue') {
+      steps {
+				withAWS(region:'us-east-1', credentials:'aws_credentials') {
+					sh '''
+						kubectl apply -f ./blue-service.json
+					'''
+				}
+			}
+    }
+    stage('Route to Green?') {
+      steps {
+        input "Do you want to redirect traffic to green?"
+      }
+    }
+    stage('Create Service To Redirect to Green') {
+      steps {
+				withAWS(region:'us-east-1', credentials:'aws_credentials') {
+					sh '''
+						kubectl apply -f ./green-service.json
+					'''
+				}
+			}
     }
   }
 }
