@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    registry = "yamenshahin/docker-test"
+    registry = "yamenshahin/devopscapstone"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
