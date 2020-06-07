@@ -10,7 +10,7 @@ pipeline {
     stage('Linting Index/HTML') {
       steps {
         script {
-          sh 'tidy -q -e *.html'
+          sh 'tidy -q -e public/*.html'
         }
       }
     }
